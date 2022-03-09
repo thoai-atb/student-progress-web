@@ -23,6 +23,7 @@ export const PieChartCustom = ({ title }) => {
           fill="#8884d8"
           paddingAngle={5}
           dataKey="value"
+          stroke="none"
           animationDuration={500}
         >
           {data.map((entry, index) => (

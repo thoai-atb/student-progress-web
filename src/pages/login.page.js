@@ -30,7 +30,8 @@ export const LoginPage = ({ onAuthentication }) => {
           <TextInput title="Password" isPassword className="my-2" />
           <Button
             text="Sign In"
-            className="my-4 w-full text-xl"
+            className="my-4 w-full text-sm"
+            fontSize="text-xl"
             onClick={handleSignIn}
           />
         </div>

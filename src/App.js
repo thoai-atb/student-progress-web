@@ -8,9 +8,11 @@ import {
 import { HomePage } from "./pages/home.page";
 import { ProcessorsPage } from "./pages/processors.page";
 import { DashboardPage } from "./pages/dashboard/dashboard.page";
-import { BrowsePage } from "./pages/browse.page";
+import { BrowsePage } from "./pages/browse/browse.page";
 import { ProblemsPage } from "./pages/problems.page";
 import { useState } from "react";
+import { StudentDetails } from "./pages/browse/student-details";
+import { BrowseList } from "./pages/browse/browse-list";
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -29,10 +31,19 @@ function App() {
         ></Route>
         <Route
           path="/"
-          element={authenticated ? <HomePage onSignOut={handleSignOut} /> : <Navigate to="/login" />}
+          element={
+            authenticated ? (
+              <HomePage onSignOut={handleSignOut} />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
         >
           <Route path="dashboard" element={<DashboardPage />} />
-          <Route path="browse" element={<BrowsePage />} />
+          <Route path="browse" element={<BrowsePage />}>
+            <Route index element={<BrowseList />} />
+            <Route path="student" element={<StudentDetails />} />
+          </Route>
           <Route path="processors" element={<ProcessorsPage />} />
           <Route path="problems" element={<ProblemsPage />} />
           <Route path="/" element={<Navigate to="/dashboard" />} />

@@ -1,9 +1,10 @@
-export const Button = ({
+export const ButtonSecondary = ({
   text,
   className,
   fontSize = "text-lg",
-  bgColor = "bg-primary-500",
-  textColor = "text-white",
+  bgColor = "",
+  textColor = "text-background-800",
+  hoverTextColor = "hover:text-primary-500",
   icon,
   ...rest
 }) => {
@@ -13,7 +14,9 @@ export const Button = ({
         ${className} 
         ${bgColor} 
         ${fontSize} 
-        ${textColor} p-2 rounded flex items-center justify-center
+        ${textColor} 
+        ${hoverTextColor} 
+        p-2 rounded flex items-center justify-center 
         `}
       {...rest}
     >
