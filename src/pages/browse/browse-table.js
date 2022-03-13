@@ -26,6 +26,30 @@ const data = [
     year: "18",
     status: "Finished",
   },
+  {
+    id: "ITITIU005",
+    name: "Pete Best",
+    year: "19",
+    status: "Application",
+  },
+  {
+    id: "ITITIU006",
+    name: "Mike Rutherford",
+    year: "19",
+    status: "Intensive English",
+  },
+  {
+    id: "ITITIU007",
+    name: "Joan Sutherland",
+    year: "19",
+    status: "Intensive English",
+  },
+  {
+    id: "ITITIU008",
+    name: "Oscar Peterson",
+    year: "19",
+    status: "Intensive English",
+  },
 ];
 
 export const BrowseTable = () => {
@@ -46,7 +70,7 @@ export const BrowseTable = () => {
           </tr>
         </thead>
         <tbody>
-          {data.concat(data.concat(data)).map((item) => (
+          {data.map((item) => (
             <tr key={item.id} className="group relative">
               <td>{item.id}</td>
               <td>{item.name}</td>

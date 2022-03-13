@@ -1,0 +1,86 @@
+export const PROCESSORS_MOCK = [
+  {
+    id: "General Mediator",
+    name: "General Mediator",
+    processors: 2,
+    problems: 0,
+  },
+  {
+    id: "Semester Mediator",
+    name: "Semester Mediator",
+    processors: 2,
+    problems: 0,
+  },
+  {
+    id: "Student Services",
+    name: "Student Services",
+    processors: 2,
+    problems: 0,
+  },
+  {
+    id: "Payment Services",
+    name: "Payment Services",
+    processors: 2,
+    problems: 0,
+  },
+  {
+    id: "Course Services",
+    name: "Course Services",
+    processors: 2,
+    problems: 0,
+  },
+  {
+    id: "Examination Services",
+    name: "Examination Services",
+    processors: 2,
+    problems: 0,
+  },
+  {
+    id: "Certification Services",
+    name: "Certification Services",
+    processors: 2,
+    problems: 0,
+  },
+  {
+    id: "Advisor Services",
+    name: "Advisor Services",
+    processors: 2,
+    problems: 0,
+  },
+  {
+    id: "Mail Services",
+    name: "Mail Services",
+    processors: 2,
+    problems: 0,
+  },
+  {
+    id: "Academic Schedule",
+    name: "Academic Schedule",
+    processors: 2,
+    problems: 0,
+  },
+  {
+    id: "Retention Services",
+    name: "Retention Services",
+    processors: 2,
+    problems: 0,
+  },
+  {
+    id: "Blackboard Services",
+    name: "Blackboard Services",
+    processors: 2,
+    problems: 0,
+  },
+  {
+    id: "Edusoft Services",
+    name: "Edusoft Services",
+    processors: 2,
+    problems: 0,
+  },
+  {
+    id: "Military Services",
+    name: "Military Services",
+    processors: 2,
+    problems: 0,
+  },
+];

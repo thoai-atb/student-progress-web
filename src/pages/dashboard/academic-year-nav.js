@@ -10,9 +10,6 @@ export const AcademicYearNav = () => {
         <YearButton year="19" />
         <YearButton year="18" />
         <YearButton year="17" />
-        <YearButton year="16" />
-        <YearButton year="15" />
-        <YearButton year="14" />
       </div>
     </div>
   );

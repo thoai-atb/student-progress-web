@@ -1,14 +1,11 @@
 export const STUDENT_YEAR_OPTIONS = [
   { value: "all", label: "All" },
-  { value: "22", label: "k22" },
-  { value: "21", label: "k21" },
-  { value: "20", label: "k20" },
-  { value: "19", label: "k19" },
-  { value: "18", label: "k18" },
-  { value: "17", label: "k17" },
-  { value: "16", label: "k16" },
-  { value: "15", label: "k15" },
-  { value: "14", label: "k14" },
+  { value: "22", label: "K22" },
+  { value: "21", label: "K21" },
+  { value: "20", label: "K20" },
+  { value: "19", label: "K19" },
+  { value: "18", label: "K18" },
+  { value: "17", label: "K17" },
 ];
 
 export const PROGRESS_OPTIONS = [

@@ -6,7 +6,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import { HomePage } from "./pages/home.page";
-import { ProcessorsPage } from "./pages/processors.page";
+import { ProcessorsPage } from "./pages/processors/processors.page";
 import { DashboardPage } from "./pages/dashboard/dashboard.page";
 import { BrowsePage } from "./pages/browse/browse.page";
 import { ProblemsPage } from "./pages/problems.page";
@@ -25,10 +25,14 @@ function App() {
   return (
     <Router>
       <Routes>
+        {/* LOGIN */}
         <Route
           path="/login"
           element={<LoginPage onAuthentication={handleAuthenticate} />}
         ></Route>
+        {/* END LOGIN */}
+
+        {/* MAIN APP */}
         <Route
           path="/"
           element={
@@ -48,6 +52,7 @@ function App() {
           <Route path="problems" element={<ProblemsPage />} />
           <Route path="/" element={<Navigate to="/dashboard" />} />
         </Route>
+        {/* END MAIN APP */}
       </Routes>
     </Router>
   );

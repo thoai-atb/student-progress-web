@@ -75,16 +75,12 @@ export const DashboardContent = () => {
             Progress Steps
           </div>
           <div className="p-4">
-            <div className="grid grid-cols-6 gap-6 text-lg">
+            <div className="flex flex-col text-lg gap-6">
               {steps.map((step, index) => (
-                <>
-                  <div key={index + "_a"} className="font-bold">
-                    {step.name}
-                  </div>
-                  <div key={index + "_b"} className="col-span-5">
-                    {step.description}
-                  </div>
-                </>
+                <div className="flex" key={index}>
+                  <div className="font-bold w-48">{step.name}</div>
+                  <div className="">{step.description}</div>
+                </div>
               ))}
             </div>
           </div>

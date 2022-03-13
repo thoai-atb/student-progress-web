@@ -12,7 +12,7 @@ export const FilterBar = () => {
       <TextInput title="Student ID" className="w-56" searchIcon />
       <TextInput title="Student Name" className="w-56" searchIcon />
       <SelectCustom label="Student Year" options={STUDENT_YEAR_OPTIONS} />
-      <SelectCustom label="Progress" options={PROGRESS_OPTIONS} />
+      <SelectCustom label="Progress Category" options={PROGRESS_OPTIONS} />
       <SelectCustom label="Step" options={STEP_OPTIONS} />
     </div>
   );
