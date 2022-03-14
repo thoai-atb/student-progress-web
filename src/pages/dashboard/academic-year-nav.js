@@ -1,15 +1,14 @@
 import { useDashboardContext } from "./dashboard.context";
 
 export const AcademicYearNav = () => {
+  const { studentYears } = useDashboardContext();
   return (
     <div className="relative h-full w-16 bg-background-100">
       <div className="absolute inset-0 max-h-full w-full overflow-auto scrollbar-styled">
-        <YearButton year="22" />
-        <YearButton year="21" />
-        <YearButton year="20" />
-        <YearButton year="19" />
-        <YearButton year="18" />
-        <YearButton year="17" />
+        {studentYears &&
+          studentYears.map((year) => (
+            <YearButton key={year.id} year={year.id} />
+          ))}
       </div>
     </div>
   );

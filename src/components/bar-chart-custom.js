@@ -3,46 +3,12 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
-  Cell, ResponsiveContainer,
+  Cell,
+  ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis
 } from "recharts";
-
-const data = [
-  {
-    name: "Application",
-    "Students": 100,
-  },
-  {
-    name: "Entry English",
-    "Students": 30,
-  },
-  {
-    name: "Intensive English",
-    "Students": 20,
-  },
-  {
-    name: "Credits",
-    "Students": 310,
-  },
-  {
-    name: "Thesis",
-    "Students": 129,
-  },
-  {
-    name: "Certificates",
-    "Students": 56,
-  },
-  {
-    name: "Finished",
-    "Students": 100,
-  },
-  {
-    name: "Dropped",
-    "Students": 18,
-  },
-];
 
 const COLORS = {
   IN_PROGRESS: "#22c7dd",
@@ -52,22 +18,24 @@ const COLORS = {
 
 const getColor = (name) => {
   switch (name) {
-    case "Finished":
+    case "finished":
       return COLORS.FINISHED;
-    case "Dropped":
+    case "dropped":
       return COLORS.DROPPED;
     default:
       return COLORS.IN_PROGRESS;
   }
 };
 
-export const BarChartCustom = () => {
+export const BarChartCustom = ({ data }) => {
+  if (!data) return null;
+  const displayData = data; // convertData(data);
   return (
     <ResponsiveContainer width="100%" height="90%" className="text-sm">
       <BarChart
         width={500}
         height={300}
-        data={data}
+        data={displayData}
         margin={{
           top: 5,
           right: 30,
@@ -81,12 +49,13 @@ export const BarChartCustom = () => {
         <Tooltip />
         <Bar
           barSize={50}
-          dataKey="Students"
+          dataKey="students"
           fill="black"
           label={{ position: "top" }}
+          name="Students"
         >
           {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={getColor(entry.name)} />
+            <Cell key={`cell-${index}`} fill={getColor(entry.id)} />
           ))}
         </Bar>
       </BarChart>
