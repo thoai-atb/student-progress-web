@@ -16,7 +16,7 @@ export const useStudentYears = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  };   
 
   useEffect(() => {
     getProgressCategories();

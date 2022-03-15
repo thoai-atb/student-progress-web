@@ -11,17 +11,25 @@ export const DashboardContent = () => {
   const { selectedProgressCategory, selectedYear, studentsData } =
     useDashboardContext();
   const currentProgressStudentsData = useMemo(() => {
+    if (!selectedProgressCategory) return null;
     return studentsData.find(
       (data) => data.progressCategoryId === selectedProgressCategory.id
     );
   }, [selectedProgressCategory, studentsData]);
-  console.log(currentProgressStudentsData);
+
   function handleBrowseClick() {
-    navigate("/browse");
+    navigate({
+      pathname: "/browse",
+      search: `?progressCategory=${
+        selectedProgressCategory?.id || "all"
+      }&studentYear=${selectedYear || "all"}`,
+    });
   }
+
   if (!selectedProgressCategory) {
     return null;
   }
+  
   return (
     <div className="relative flex-1 h-full flex flex-col items-center">
       <div className="absolute inset-0 overflow-auto scrollbar-styled p-10">

@@ -7,6 +7,7 @@ export const useStudentsData = (studentYear) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    // const controller = new AbortController();
     const getProgressCategories = async () => {
       setIsLoading(true);
       try {

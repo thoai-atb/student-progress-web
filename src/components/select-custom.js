@@ -39,6 +39,7 @@ export const SelectCustom = ({
   label,
   options = mockOptions,
   fontSize = "text-lg",
+  ...props
 }) => {
   return (
     <div className={"flex justify-center flex-col " + fontSize}>
@@ -56,6 +57,7 @@ export const SelectCustom = ({
         className="w-56"
         defaultValue={options[0]}
         options={options}
+        {...props}
       />
     </div>
   );

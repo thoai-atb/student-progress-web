@@ -10,7 +10,7 @@ export const STUDENT_YEAR_OPTIONS = [
 
 export const PROGRESS_OPTIONS = [
   { value: "general", label: "General" },
-  { value: "semesterii2022", label: "Semester II 2022" },
+  { value: "semester", label: "Semester II 2022" },
 ];
 
 export const STEP_OPTIONS = [

@@ -11,7 +11,7 @@ import { DashboardPage } from "./pages/dashboard/dashboard.page";
 import { BrowsePage } from "./pages/browse/browse.page";
 import { ProblemsPage } from "./pages/problems.page";
 import { useState } from "react";
-import { StudentDetails } from "./pages/browse/student-details";
+import { StudentDetails } from "./pages/browse/student-details/student-details";
 import { BrowseList } from "./pages/browse/browse-list";
 
 function App() {
@@ -46,7 +46,7 @@ function App() {
           <Route path="dashboard" element={<DashboardPage />} />
           <Route path="browse" element={<BrowsePage />}>
             <Route index element={<BrowseList />} />
-            <Route path="student" element={<StudentDetails />} />
+            <Route path="student/:studentId" element={<StudentDetails />} />
           </Route>
           <Route path="processors" element={<ProcessorsPage />} />
           <Route path="problems" element={<ProblemsPage />} />
