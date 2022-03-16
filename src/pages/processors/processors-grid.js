@@ -3,20 +3,45 @@ import { useProcessorsContext } from "./processors.context";
 export const ProcessorsGrid = () => {
   const { processors, setSelectedProcessor, selectedProcessor } =
     useProcessorsContext();
+  const mediatorProcessors = processors?.filter(
+    (processor) => processor.isMediator
+  );
+  const nonMediatorProcessors = processors?.filter(
+    (processor) => !processor.isMediator
+  );
+
   return (
     <div className="flex-1 h-full">
       <div
-        className="grid grid-cols-3 gap-4 scrollbar-styled overflow-auto pr-4"
+        className="scrollbar-styled overflow-auto pr-4"
         style={{ maxHeight: "40rem" }}
       >
-        {processors.map((processorData) => (
-          <ProcessorItem
-            key={processorData.id}
-            active={processorData.id === selectedProcessor.id}
-            processorData={processorData}
-            onSelect={() => setSelectedProcessor(processorData)}
-          />
-        ))}
+        <div className="mb-4 text-lg">Mediators</div>
+        <div className="grid grid-cols-3 gap-4" style={{ maxHeight: "40rem" }}>
+          {mediatorProcessors?.map((processorData) => (
+            <ProcessorItem
+              key={processorData.id}
+              active={
+                selectedProcessor && processorData.id === selectedProcessor.id
+              }
+              processorData={processorData}
+              onSelect={() => setSelectedProcessor(processorData)}
+            />
+          ))}
+        </div>
+        <div className="my-4 text-lg">Event Processors</div>
+        <div className="grid grid-cols-3 gap-4" style={{ maxHeight: "40rem" }}>
+          {nonMediatorProcessors?.map((processorData) => (
+            <ProcessorItem
+              key={processorData.id}
+              active={
+                selectedProcessor && processorData.id === selectedProcessor.id
+              }
+              processorData={processorData}
+              onSelect={() => setSelectedProcessor(processorData)}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

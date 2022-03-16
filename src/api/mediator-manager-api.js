@@ -35,4 +35,7 @@ export const MediatorManagerAPI = {
       },
     });
   },
+  getProcessors: (progressCategoryId) => {
+    return axiosInstance.get(`/api/processors/${progressCategoryId}`);
+  },
 };

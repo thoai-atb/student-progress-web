@@ -7,7 +7,7 @@ export const ProgressStepDescription = () => {
   if (!selectedStep)
     return (
       <WhiteCard>
-        <div>No Steps Selected</div>
+        <div>(No steps selected)</div>
       </WhiteCard>
     );
   return (

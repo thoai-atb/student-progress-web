@@ -1,5 +1,6 @@
-import { createContext, useContext, useState } from "react";
-import { PROCESSORS_MOCK } from "./processors-mock-data";
+import { createContext, useContext, useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { useProcessors } from "../../hooks/use-processors";
 
 export const ProcessorsContext = createContext();
 
@@ -14,10 +15,15 @@ export const useProcessorsContext = () => {
 };
 
 export const ProcessorsProvider = ({ children }) => {
-  const [selectedProcessor, setSelectedProcessor] = useState(
-    PROCESSORS_MOCK[0]
+  const [searchParams] = useSearchParams();
+  const { processors } = useProcessors(
+    searchParams.get("progressCategory") || "all"
   );
-  const [processors] = useState(PROCESSORS_MOCK);
+  const [selectedProcessor, setSelectedProcessor] = useState(null);
+
+  useEffect(() => {
+    if (processors?.[0]) setSelectedProcessor(processors[0]);
+  }, [processors]);
 
   const value = {
     processors,

@@ -27,7 +27,8 @@ export const StudentDetailsProvider = ({ children }) => {
   const [selectedStep, setSelectedStep] = useState(null);
 
   useEffect(() => {
-    if (currentSteps) setSelectedStep(currentSteps[0]);
+    if (currentSteps)
+      setSelectedStep(currentSteps.find((step) => step.status === "current"));
   }, [currentSteps]);
 
   const value = {

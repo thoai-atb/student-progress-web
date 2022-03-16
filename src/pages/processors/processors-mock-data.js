@@ -2,12 +2,14 @@ export const PROCESSORS_MOCK = [
   {
     id: "General Mediator",
     name: "General Mediator",
+    isMediator: true,
     processors: 2,
     problems: 0,
   },
   {
     id: "Semester Mediator",
     name: "Semester Mediator",
+    isMediator: true,
     processors: 2,
     problems: 0,
   },

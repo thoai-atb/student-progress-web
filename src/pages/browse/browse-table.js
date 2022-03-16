@@ -40,6 +40,13 @@ export const BrowseTable = () => {
               </td>
             </tr>
           ))}
+          {students.length === 0 && (
+            <tr className="tr-inactive">
+              <td colSpan="4" className="text-center">
+                (No results)
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>

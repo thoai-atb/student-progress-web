@@ -60,3 +60,7 @@ code {
 .table-styled td {
   @apply p-4 text-background-800;
 }
+
+.table-styled .tr-inactive {
+  @apply hover:bg-white;
+}
