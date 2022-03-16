@@ -44,7 +44,7 @@ export const ProgressesNav = () => {
   }
 
   return (
-    <div className="relative h-full w-96 bg-background-100">
+    <div className="relative h-full w-96 bg-background-50">
       <div className="absolute inset-0 max-h-full w-full overflow-auto scrollbar-styled">
         {displayProgressList.map((displayData) => {
           const { category } = displayData;

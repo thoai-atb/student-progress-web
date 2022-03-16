@@ -23,7 +23,7 @@ export const Nav = ({ onSignOut }) => {
         <NavItem title="Problems" path="problems" />
       </div>
       <div
-        className="bg-background-50 rounded-full w-16 h-16 truncate cursor-pointer hover:bg-background-600"
+        className="bg-background-25 rounded-full w-16 h-16 truncate cursor-pointer hover:bg-background-600"
         title="Sign Out"
         onClick={handleSignOut}
       ></div>
@@ -39,7 +39,7 @@ const NavItem = ({ title, path }) => {
     <Link
       className={
         "text-2xl font-thin w-52 uppercase truncate px-8 h-full flex items-center justify-center" +
-        (active ? " bg-background-50 text-primary-600" : " bg-background-100")
+        (active ? " bg-background-25 text-primary-600" : " bg-background-100")
       }
       to={path}
     >

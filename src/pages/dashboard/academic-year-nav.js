@@ -3,7 +3,7 @@ import { useDashboardContext } from "./dashboard.context";
 export const AcademicYearNav = () => {
   const { studentYears } = useDashboardContext();
   return (
-    <div className="relative h-full w-16 bg-background-100">
+    <div className="relative h-full w-16 bg-background-50">
       <div className="absolute inset-0 max-h-full w-full overflow-auto scrollbar-styled">
         {studentYears &&
           studentYears.map((year) => (
