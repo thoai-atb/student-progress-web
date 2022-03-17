@@ -1,11 +1,11 @@
 import { SelectCustom } from "../../components/select-custom";
-import { TextInput } from "../../components/text-input";
 import {
   STUDENT_YEAR_OPTIONS
 } from "./browse-mock-data";
 import { useBrowseContext } from "./browse.context";
-import { ProgressCategorySelect } from "./progress-category-select";
-import { ProgressStepSelect } from "./progress-step-select";
+import { ProgressCategorySelect } from "./input-components/progress-category-select";
+import { ProgressStepSelect } from "./input-components/progress-step-select";
+import { SearchParamInput } from "./input-components/search-param-input";
 
 export const FilterBar = () => {
   const { searchParams, setSearchParams } = useBrowseContext();
@@ -15,8 +15,8 @@ export const FilterBar = () => {
   }
   return (
     <div className="m-4 mt-8 w-full flex justify-between">
-      <TextInput title="Student ID" className="w-56" searchIcon />
-      <TextInput title="Student Name" className="w-56" searchIcon />
+      <SearchParamInput title="Student ID" param="studentId" />
+      <SearchParamInput title="Student Name" param="studentName" />
       <SelectCustom
         label="Student Year"
         onChange={handleYearChange}

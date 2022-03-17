@@ -1,6 +1,6 @@
 import { useMemo } from "react";
-import { SelectCustom } from "../../components/select-custom";
-import { useBrowseContext } from "./browse.context";
+import { SelectCustom } from "../../../components/select-custom";
+import { useBrowseContext } from "../browse.context";
 
 export const ProgressCategorySelect = () => {
   const { searchParams, setSearchParams } = useBrowseContext();

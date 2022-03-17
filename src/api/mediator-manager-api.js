@@ -20,12 +20,21 @@ export const MediatorManagerAPI = {
   getStudentsData: (studentYear) => {
     return axiosInstance.get(`/api/students-data/${studentYear}`);
   },
-  getBrowseStudents: (progressCategoryId, studentYearId, statusId) => {
+  getBrowseStudents: ({
+    progressCategoryId,
+    studentYearId,
+    statusId,
+    studentId,
+    studentName,
+  }) => {
+    const params = {};
+    if (progressCategoryId) params.progressCategoryId = progressCategoryId;
+    if (studentYearId) params.studentYearId = studentYearId;
+    if (statusId) params.statusId = statusId;
+    if (studentId) params.studentId = studentId;
+    if (studentName) params.studentName = studentName;
     return axiosInstance.get(`/api/browse/${progressCategoryId}`, {
-      params: {
-        studentYearId,
-        statusId,
-      },
+      params,
     });
   },
   getStudentData: (studentId, progressCategoryId) => {

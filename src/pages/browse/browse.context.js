@@ -24,11 +24,21 @@ export const BrowseProvider = ({ children }) => {
     () => searchParams.get("status") || "",
     [searchParams]
   );
-  const { students, isLoading } = useBrowseStudents(
+  const studentId = useMemo(
+    () => searchParams.get("studentId") || "",
+    [searchParams]
+  );
+  const studentName = useMemo(
+    () => searchParams.get("studentName") || "",
+    [searchParams]
+  );
+  const { students, isLoading } = useBrowseStudents({
     progressCategoryId,
     studentYearId,
-    statusId
-  );
+    statusId,
+    studentId,
+    studentName,
+  });
 
   useEffect(() => {
     if (!searchParams.get("progressCategory") && progressCategories?.[0]?.id) {

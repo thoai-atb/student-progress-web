@@ -1,6 +1,6 @@
-import { useMemo } from "react";
-import { SelectCustom } from "../../components/select-custom";
-import { useBrowseContext } from "./browse.context";
+import { useEffect, useMemo, useState } from "react";
+import { SelectCustom } from "../../../components/select-custom";
+import { useBrowseContext } from "../browse.context";
 
 export const ProgressStepSelect = () => {
   const {
@@ -9,6 +9,8 @@ export const ProgressStepSelect = () => {
     searchParams,
     setSearchParams,
   } = useBrowseContext();
+
+  const [selectedOption, setSelectedOption] = useState(null);
 
   const stepOptions = useMemo(() => {
     var steps = [];
@@ -34,19 +36,26 @@ export const ProgressStepSelect = () => {
     ];
   }, [progressCategories, progressCategoryId]);
 
-  function handleChange({ value }) {
-    searchParams.set("status", value);
-    setSearchParams(searchParams);
+  function handleChange(option) {
+    setSelectedOption(option);
   }
+
+  useEffect(() => {
+    if (selectedOption) {
+      searchParams.set("status", selectedOption.value);
+      setSearchParams(searchParams);
+    }
+  }, [selectedOption, searchParams, setSearchParams]);
+
+  useEffect(() => {
+    if (stepOptions) setSelectedOption(stepOptions[0]);
+  }, [stepOptions]);
 
   return (
     <SelectCustom
       label="Status"
       onChange={handleChange}
-      value={
-        stepOptions.find((o) => o.value === searchParams.get("status")) ||
-        stepOptions?.[0]
-      }
+      value={selectedOption}
       options={stepOptions}
     />
   );
