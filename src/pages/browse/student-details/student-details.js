@@ -1,6 +1,6 @@
 import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { ButtonSecondary } from "../../../components/button-secondary";
+import { ButtonTransparent } from "../../../components/button-transparent";
 import { SelectCustom } from "../../../components/select-custom";
 import { PROGRESS_OPTIONS } from "../browse-mock-data";
 import { ProgressIndicator } from "./progress-indicator";
@@ -15,7 +15,7 @@ export const StudentDetails = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   function handleMyBack() {
-    navigate("/browse");
+    navigate(-1);
   }
 
   function handleProgressCategoryChange({ value }) {
@@ -27,8 +27,8 @@ export const StudentDetails = () => {
     <StudentDetailsProvider>
       <div className="relative w-full h-full">
         <div className="flex items-center justify-between my-4">
-          <ButtonSecondary
-            text="Back to Browse"
+          <ButtonTransparent
+            text="Back"
             className="w-15 my-4"
             onClick={handleMyBack}
             icon={<FaArrowLeft />}

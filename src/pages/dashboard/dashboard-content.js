@@ -29,7 +29,7 @@ export const DashboardContent = () => {
   if (!selectedProgressCategory) {
     return null;
   }
-  
+
   return (
     <div className="relative flex-1 h-full flex flex-col items-center">
       <div className="absolute inset-0 overflow-auto scrollbar-styled p-10">

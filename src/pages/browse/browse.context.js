@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useMemo } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useBrowseStudents } from "../../hooks/use-browse-students";
 import { useProgressCategories } from "../../hooks/use-progress-categories";
@@ -11,7 +11,9 @@ export const useBrowseContext = () => {
 
 export const BrowseProvider = ({ children }) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { progressCategories } = useProgressCategories();
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(8);
+  const { progressCategories, getProgressMetadata } = useProgressCategories();
   const progressCategoryId = useMemo(
     () => searchParams.get("progressCategory") || "",
     [searchParams]
@@ -32,12 +34,14 @@ export const BrowseProvider = ({ children }) => {
     () => searchParams.get("studentName") || "",
     [searchParams]
   );
-  const { students, isLoading } = useBrowseStudents({
+  const { students, isLoading, total } = useBrowseStudents({
     progressCategoryId,
     studentYearId,
     statusId,
     studentId,
     studentName,
+    page,
+    size: pageSize,
   });
 
   useEffect(() => {
@@ -47,13 +51,23 @@ export const BrowseProvider = ({ children }) => {
     }
   }, [progressCategories, searchParams, setSearchParams]);
 
+  useEffect(() => {
+    setPage(1);
+  }, [progressCategoryId, studentYearId, statusId, studentId, studentName]);
+
   const value = {
     searchParams,
     setSearchParams,
     progressCategories,
     progressCategoryId,
+    getProgressMetadata,
     students,
     isLoading,
+    page,
+    setPage,
+    pageSize,
+    setPageSize,
+    total,
   };
   return (
     <BrowseContext.Provider value={value}>{children}</BrowseContext.Provider>

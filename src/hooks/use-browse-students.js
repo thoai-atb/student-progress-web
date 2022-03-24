@@ -7,10 +7,13 @@ export const useBrowseStudents = ({
   statusId,
   studentId,
   studentName,
+  page,
+  size,
 }) => {
   const [students, setStudents] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     const getBrowseStudents = async () => {
@@ -23,8 +26,11 @@ export const useBrowseStudents = ({
           statusId,
           studentId,
           studentName,
+          page,
+          size,
         });
-        setStudents(response.data);
+        setTotal(response.data.total);
+        setStudents(response.data.data);
       } catch (error) {
         setError(error);
       } finally {
@@ -32,11 +38,20 @@ export const useBrowseStudents = ({
       }
     };
     getBrowseStudents();
-  }, [progressCategoryId, studentYearId, statusId, studentId, studentName]);
+  }, [
+    progressCategoryId,
+    studentYearId,
+    statusId,
+    studentId,
+    studentName,
+    page,
+    size,
+  ]);
 
   return {
     students,
     isLoading,
     error,
+    total,
   };
 };

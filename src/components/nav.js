@@ -9,13 +9,13 @@ export const Nav = ({ onSignOut }) => {
     navigate("/login");
   }
   return (
-    <div className="w-full bg-background-100 h-24 flex items-center px-4 text-background-800 gap-4">
+    <div className="w-full bg-background-100 h-20 flex items-center px-4 text-background-800 gap-4">
       <img
         src={logo}
         alt="logo"
-        className="w-16 h-16 rounded-full border-2 border-white"
+        className="w-14 h-14 rounded-full border-2 border-white"
       />
-      <div className="text-2xl truncate">STUDENT PROGRESS MANAGER</div>
+      <div className="text-xl truncate">STUDENT PROGRESS MANAGER</div>
       <div className="flex-1 h-full flex justify-center truncate">
         <NavItem title="Dashboard" path="dashboard" />
         <NavItem title="Browse" path="browse" />
@@ -23,7 +23,7 @@ export const Nav = ({ onSignOut }) => {
         <NavItem title="Problems" path="problems" />
       </div>
       <div
-        className="bg-background-25 rounded-full w-16 h-16 truncate cursor-pointer hover:bg-background-600"
+        className="bg-background-25 rounded-full w-14 h-14 truncate cursor-pointer hover:bg-background-600"
         title="Sign Out"
         onClick={handleSignOut}
       ></div>
@@ -38,7 +38,7 @@ const NavItem = ({ title, path }) => {
   return (
     <Link
       className={
-        "text-2xl font-thin w-52 uppercase truncate px-8 h-full flex items-center justify-center" +
+        "text-xl font-thin w-52 uppercase truncate px-8 h-full flex items-center justify-center" +
         (active ? " bg-background-25 text-primary-600" : " bg-background-100")
       }
       to={path}

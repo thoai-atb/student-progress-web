@@ -1,10 +1,17 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { MediatorManagerAPI } from "../api/mediator-manager-api";
 
 export const useProgressCategories = () => {
   const [progressCategories, setProgressCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  const getProgressMetadata = useCallback(
+    (progressCategoryId) => {
+      return progressCategories.find((c) => c.id === progressCategoryId);
+    },
+    [progressCategories]
+  );
 
   const getProgressCategories = async () => {
     setIsLoading(true);
@@ -22,5 +29,5 @@ export const useProgressCategories = () => {
     getProgressCategories();
   }, []);
 
-  return { progressCategories, isLoading, error };
+  return { progressCategories, getProgressMetadata, isLoading, error };
 };

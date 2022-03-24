@@ -6,12 +6,20 @@ const mockData = [
   { name: "Dropped", value: 50, color: "#eb1446" }, // error 500
 ];
 
-export const PieChartCustom = ({ title, data = mockData, textUnit, total }) => {
+export const PieChartCustom = ({
+  title,
+  data = mockData,
+  textUnit,
+  total,
+  active,
+}) => {
+  const height = 220;
+  const width = 300;
   return (
-    <div className="flex flex-col items-center relative">
+    <div className="flex flex-col items-center relative mt-2">
       <PieChart
-        width={300}
-        height={250}
+        width={width}
+        height={height}
         className="relative flex items-center justify-center"
       >
         <Pie
@@ -19,9 +27,9 @@ export const PieChartCustom = ({ title, data = mockData, textUnit, total }) => {
           startAngle={90}
           endAngle={-270}
           innerRadius={70}
-          outerRadius={100}
+          outerRadius={90}
           fill="#8884d8"
-          paddingAngle={5}
+          paddingAngle={0}
           dataKey="value"
           stroke="none"
           animationDuration={500}
@@ -35,29 +43,34 @@ export const PieChartCustom = ({ title, data = mockData, textUnit, total }) => {
       <div
         className="absolute w-full h-full inset-0 flex items-center flex-col justify-center"
         style={{
-          width: 300,
-          height: 250,
+          width: width,
+          height: height,
         }}
       >
         <div className="text-3xl">{total}</div>
         <div className="text-lg">{textUnit}</div>
       </div>
-      <LabelLegend title={title} data={data} />
+      <LabelLegend active={active} title={title} data={data} />
     </div>
   );
 };
 
-export const LabelLegend = ({ title, data }) => {
+export const LabelLegend = ({ title, data, active }) => {
   return (
     <div className="w-full flex flex-col">
-      <div className="flex items-center justify-center font-bold text-xl my-2">
+      <div
+        className={
+          "flex items-center justify-center font-bold text-xl mb-4" +
+          (active ? " text-primary-500" : "")
+        }
+      >
         {title}
       </div>
       {data.map((entry, index) => {
         return (
           <div
             key={index}
-            className="flex items-center justify-between text-md"
+            className="flex items-center justify-between text-lg"
           >
             <div className="flex gap-2 items-center">
               <div

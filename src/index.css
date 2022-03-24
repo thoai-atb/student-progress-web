@@ -45,20 +45,31 @@ code {
   border-radius: 10px;
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
 .table-styled {
-  @apply rounded overflow-hidden;
+  @apply rounded overflow-hidden text-background-900;
 }
 
 .table-styled tr {
-  @apply hover:bg-primary-50 border-b-2 border-gray-200;
+  @apply hover:bg-primary-50 border-b-2 border-gray-200 h-10;
 }
 
 .table-styled th {
-  @apply bg-background-100 text-xl text-background-900 text-left font-thin p-4 uppercase;
+  @apply bg-background-100 text-xl  text-left font-thin p-4 uppercase h-10;
 }
 
 .table-styled td {
-  @apply p-4 text-background-800;
+  @apply p-4 text-lg h-10;
 }
 
 .table-styled .tr-inactive {

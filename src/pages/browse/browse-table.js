@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useBrowseContext } from "./browse.context";
 
 export const BrowseTable = () => {
-  const { students, searchParams, isLoading } = useBrowseContext();
+  const { students, searchParams, isLoading, pageSize } = useBrowseContext();
   const navigate = useNavigate();
   const path = useLocation().pathname;
   function handleSelectStudent(studentId) {
@@ -27,17 +27,30 @@ export const BrowseTable = () => {
         </thead>
         <tbody>
           {!isLoading &&
-            students.slice(0, 8).map((item) => (
+            students.map((item) => (
               <tr key={item.id} className="group relative">
                 <td>{item.id}</td>
                 <td>{item.name}</td>
                 <td>K{item.studentYear}</td>
-                <td>{item.status}</td>
+                <td
+                  className={(() => {
+                    switch (item.status) {
+                      case "Finished":
+                        return "text-success-600";
+                      case "Dropped":
+                        return "text-error-500";
+                      default:
+                        return "";
+                    }
+                  })()}
+                >
+                  {item.status}
+                </td>
                 <td
                   className="absolute right-0 group-hover:opacity-100 opacity-0 cursor-pointer hover:text-primary-500 text-2xl"
                   onClick={() => handleSelectStudent(item.id)}
                 >
-                  <FaEye />
+                  <FaEye className="text-xl" />
                 </td>
               </tr>
             ))}
@@ -48,13 +61,17 @@ export const BrowseTable = () => {
               </td>
             </tr>
           )}
-          {isLoading && (
-            <tr className="tr-inactive">
-              <td colSpan="4" className="text-center">
-                (Loading...)
-              </td>
-            </tr>
-          )}
+          {isLoading &&
+            Array(pageSize)
+              .fill("DSF")
+              .map((_, index) => (
+                <tr className="tr-inactive" key={index}>
+                  <td className="opacity-20">Loading...</td>
+                  <td className="opacity-0">...</td>
+                  <td className="opacity-0">...</td>
+                  <td className="opacity-0">...</td>
+                </tr>
+              ))}
         </tbody>
       </table>
     </div>

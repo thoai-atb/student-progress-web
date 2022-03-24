@@ -13,6 +13,9 @@ import { ProblemsPage } from "./pages/problems.page";
 import { useState } from "react";
 import { StudentDetails } from "./pages/browse/student-details/student-details";
 import { BrowseList } from "./pages/browse/browse-list";
+import { DashboardContent } from "./pages/dashboard/dashboard-content";
+import { DashboardFeaturedProgresses } from "./pages/dashboard/dashboard-featured-progresses";
+import { AppContextProvider } from "./app.context";
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -23,38 +26,46 @@ function App() {
     setAuthenticated(false);
   }
   return (
-    <Router>
-      <Routes>
-        {/* LOGIN */}
-        <Route
-          path="/login"
-          element={<LoginPage onAuthentication={handleAuthenticate} />}
-        ></Route>
-        {/* END LOGIN */}
+    <AppContextProvider>
+      <Router>
+        <Routes>
+          {/* LOGIN */}
+          <Route
+            path="/login"
+            element={<LoginPage onAuthentication={handleAuthenticate} />}
+          ></Route>
+          {/* END LOGIN */}
 
-        {/* MAIN APP */}
-        <Route
-          path="/"
-          element={
-            authenticated ? (
-              <HomePage onSignOut={handleSignOut} />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        >
-          <Route path="dashboard" element={<DashboardPage />} />
-          <Route path="browse" element={<BrowsePage />}>
-            <Route index element={<BrowseList />} />
-            <Route path="student/:studentId" element={<StudentDetails />} />
+          {/* MAIN APP */}
+          <Route
+            path="/"
+            element={
+              authenticated ? (
+                <HomePage onSignOut={handleSignOut} />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          >
+            <Route path="dashboard" element={<DashboardPage />}>
+              <Route index element={<DashboardContent />} />
+              <Route
+                path="settings"
+                element={<DashboardFeaturedProgresses />}
+              />
+            </Route>
+            <Route path="browse" element={<BrowsePage />}>
+              <Route index element={<BrowseList />} />
+              <Route path="student/:studentId" element={<StudentDetails />} />
+            </Route>
+            <Route path="processors" element={<ProcessorsPage />} />
+            <Route path="problems" element={<ProblemsPage />} />
+            <Route path="/" element={<Navigate to="/dashboard" />} />
           </Route>
-          <Route path="processors" element={<ProcessorsPage />} />
-          <Route path="problems" element={<ProblemsPage />} />
-          <Route path="/" element={<Navigate to="/dashboard" />} />
-        </Route>
-        {/* END MAIN APP */}
-      </Routes>
-    </Router>
+          {/* END MAIN APP */}
+        </Routes>
+      </Router>
+    </AppContextProvider>
   );
 }
 

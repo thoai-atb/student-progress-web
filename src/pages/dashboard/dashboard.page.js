@@ -1,26 +1,40 @@
 import { useEffect, useState } from "react";
+import { Outlet } from "react-router-dom";
+import { useAppContext } from "../../app.context";
 import { useProgressCategories } from "../../hooks/use-progress-categories";
 import { useStudentYears } from "../../hooks/use-student-years";
 import { useStudentsData } from "../../hooks/use-students-data";
 import { AcademicYearNav } from "./academic-year-nav";
-import { DashboardContent } from "./dashboard-content";
 import { DashboardContext } from "./dashboard.context";
 import { ProgressesNav } from "./progress-nav";
 
 export const DashboardPage = () => {
   const [selectedProgressCategory, setSelectedProgressCategory] = useState();
   const [selectedYear, setSelectedYear] = useState("22");
+  const {featuredProgressIds, setFeaturedProgressIds} = useAppContext();
+  const [featuredProgresses, setFeaturedProgresses] = useState([]);
 
   const { progressCategories } = useProgressCategories();
   const { studentYears } = useStudentYears();
-  const { studentsData, isLoading: studentsDataLoading } = useStudentsData(selectedYear);
+  const { studentsData, isLoading: studentsDataLoading } =
+    useStudentsData(selectedYear);
 
   useEffect(() => {
-    if (progressCategories && progressCategories.length > 0) {
-      setSelectedProgressCategory(progressCategories[0]);
+    if (featuredProgresses && featuredProgresses.length > 0) {
+      setSelectedProgressCategory(featuredProgresses[0]);
     }
-    setSelectedProgressCategory(progressCategories[0]);
-  }, [progressCategories]);
+  }, [featuredProgresses]);
+
+  useEffect(() => {
+    const progresses = [];
+    for (const id of featuredProgressIds) {
+      const progress = progressCategories.find((p) => p.id === id);
+      if (progress) {
+        progresses.push(progress);
+      }
+    }
+    setFeaturedProgresses(progresses);
+  }, [featuredProgressIds, progressCategories]);
 
   return (
     <DashboardContext.Provider
@@ -33,12 +47,14 @@ export const DashboardPage = () => {
         setSelectedProgressCategory,
         selectedYear,
         setSelectedYear,
+        featuredProgresses,
+        setFeaturedProgressIds,
       }}
     >
       <div className="w-full h-full flex items-start flex-row text-xl">
         <AcademicYearNav />
         <ProgressesNav />
-        <DashboardContent />
+        <Outlet />
       </div>
     </DashboardContext.Provider>
   );

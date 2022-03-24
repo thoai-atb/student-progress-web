@@ -1,67 +1,69 @@
-import { memo, useCallback, useMemo } from "react";
+import { memo, useCallback } from "react";
+import { FaRegSun } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import { PieChartCustom } from "../../components/pie-chart-custom";
 import { useDashboardContext } from "./dashboard.context";
+import { useDisplayStudentsData } from "./use-display-students-data";
 
 export const ProgressesNav = () => {
   const {
     selectedProgressCategory,
     setSelectedProgressCategory,
-    progressCategories,
+    featuredProgresses,
     studentsData,
   } = useDashboardContext();
 
-  const displayProgressList = useMemo(() => {
-    return progressCategories
-      .map((category) => {
-        const metadata = studentsData.find(
-          (data) => data.progressCategoryId === category.id
-        );
-        if (!metadata) return null;
-        const total = metadata.data.reduce(
-          (acc, curr) => acc + curr.students,
-          0
-        );
-        const finishedCount = metadata.data.find(
-          (step) => step.id === "finished"
-        ).students;
-        const droppedCount = metadata.data.find(
-          (step) => step.id === "dropped"
-        ).students;
-        const displayData = {
-          category,
-          total,
-          inProgress: total - finishedCount - droppedCount,
-          finished: finishedCount,
-          dropped: droppedCount,
-        };
-        return displayData;
-      })
-      .filter((category) => category);
-  }, [progressCategories, studentsData]);
+  const displayProgressList = useDisplayStudentsData(
+    featuredProgresses,
+    studentsData
+  );
 
   function handleClick(category) {
     setSelectedProgressCategory(category);
   }
 
   return (
-    <div className="relative h-full w-96 bg-background-50">
-      <div className="absolute inset-0 max-h-full w-full overflow-auto scrollbar-styled">
-        {displayProgressList.map((displayData) => {
-          const { category } = displayData;
-          return (
-            <PieChartButton
-              category={category}
-              key={category.id}
-              title={category.name}
-              selected={
-                selectedProgressCategory &&
-                category.id === selectedProgressCategory.id
-              }
-              displayData={displayData}
-              onClick={handleClick}
-            />
-          );
-        })}
+    <div
+      className="relative h-full bg-background-50 flex flex-col"
+      style={{
+        width: 350,
+      }}
+    >
+      <FeaturedHeader />
+      <div className="relative flex-1">
+        <div className="absolute inset-0 max-h-full w-full overflow-auto scrollbar-styled">
+          {displayProgressList.map((displayData) => {
+            const { category } = displayData;
+            return (
+              <PieChartButton
+                category={category}
+                key={category.id}
+                title={category.name}
+                selected={
+                  selectedProgressCategory &&
+                  category.id === selectedProgressCategory.id
+                }
+                displayData={displayData}
+                onClick={handleClick}
+              />
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const FeaturedHeader = () => {
+  const navigate = useNavigate();
+  return (
+    <div className="relative flex group items-center h-12 px-4 text-background-600 justify-center bg-background-25 text-lg">
+      <div>Featured progresses</div>
+      <div
+        className="flex group-hover:flex absolute right-0 h-full justify-center items-center hover:text-primary-500 cursor-pointer px-4"
+        onClick={() => navigate("settings")}
+      >
+        <FaRegSun />
       </div>
     </div>
   );
@@ -88,11 +90,14 @@ export const PieChartButton = memo(
       >
         <PieChartCustom
           title={title}
+          active={active}
           data={pieChartData}
           textUnit="students"
           total={displayData.total}
         />
-        {!active && <div className={"absolute w-full h-full cursor-pointer"} />}
+        {!active && (
+          <div className={"absolute w-full h-full cursor-pointer top-0"} />
+        )}
       </div>
     );
   }

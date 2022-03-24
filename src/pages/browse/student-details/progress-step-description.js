@@ -1,5 +1,7 @@
 import { WhiteCard } from "../../../components/white-card";
 import { WhiteTriangleUp } from "../../../components/white-triangle-up";
+import { DataTable } from "./data-table";
+import { PercentBar } from "./percent-bar";
 import { useStudentDetailsContext } from "./student-details.context";
 
 export const ProgressStepDescription = () => {
@@ -17,35 +19,27 @@ export const ProgressStepDescription = () => {
         {selectedStep.name}
       </div>
       <div className="p-4 text-background-900">
-        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-        ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
-        dis parturient montes, nascetur ridiculus mus. Donec quam felis,
-        ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa
-        quis enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-        Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
-        penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec
-        quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla
-        consequat massa quis enim. Lorem ipsum dolor sit amet, consectetuer
-        adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum
-        sociis natoque penatibus et magnis dis parturient montes, nascetur
-        ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
-        quis, sem. Nulla consequat massa quis enim.
+        <div className="text-background-900 my-2">
+          <span className="font-bold mr-2">Description:</span>
+          <span className="">{selectedStep.description}</span>
+        </div>
+        <div className="text-background-900 my-2">
+          <span className="font-bold mr-2">Status:</span>
+          <span className="">{selectedStep.statusName}</span>
+        </div>
       </div>
-      <div className="p-4 text-background-900">
-        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-        ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
-        dis parturient montes, nascetur ridiculus mus. Donec quam felis,
-        ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa
-        quis enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-        Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
-        penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec
-        quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla
-        consequat massa quis enim. Lorem ipsum dolor sit amet, consectetuer
-        adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum
-        sociis natoque penatibus et magnis dis parturient montes, nascetur
-        ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
-        quis, sem. Nulla consequat massa quis enim.
-      </div>
+      {selectedStep.progress !== undefined && (
+        <div className="p-4 text-background-900">
+          <PercentBar percent={selectedStep.progress} />
+        </div>
+      )}
+      {selectedStep.info !== undefined && (
+        <div className="p-4 text-background-900 flex gap-4">
+          {selectedStep.info.map((info) => (
+            <DataTable key={info.title} title={info.title} data={info.data} />
+          ))}
+        </div>
+      )}
     </WhiteCard>
   );
 };
