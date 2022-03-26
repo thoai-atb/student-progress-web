@@ -1,14 +1,32 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { MediatorManagerAPI } from "../api/mediator-manager-api";
+import mainLogo from "../assets/hcmiu-logo.png";
 import { Button } from "../components/button";
 import { TextInput } from "../components/text-input";
-import mainLogo from "../assets/hcmiu-logo.png";
-import { useNavigate } from "react-router-dom";
 
 export const LoginPage = ({ onAuthentication }) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const handleSignIn = () => {
-    onAuthentication();
-    navigate("/");
-  };
+  
+  function handleSignIn() {
+    const loginAsync = async () => {
+      if (!username || !password) {
+        alert("Please enter username and password");
+        return;
+      }
+      const res = await MediatorManagerAPI.login(username, password);
+      if (!res.data.success) {
+        alert("Invalid username or password");
+        return;
+      }
+      onAuthentication();
+      navigate("/");
+    };
+    loginAsync();
+  }
+
   return (
     <div className="w-screen h-screen bg-background-50 flex items-center justify-center flex-col">
       <div className="flex items-center justify-center">
@@ -26,8 +44,19 @@ export const LoginPage = ({ onAuthentication }) => {
             A system for student learning progress management with event driven
             mediator pattern
           </div>
-          <TextInput title="Username" className="my-2" />
-          <TextInput title="Password" isPassword className="my-2" />
+          <TextInput
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            title="Username"
+            className="my-2"
+          />
+          <TextInput
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            title="Password"
+            isPassword
+            className="my-2"
+          />
           <Button
             text="Sign In"
             className="my-4 w-full text-sm"

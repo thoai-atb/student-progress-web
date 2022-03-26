@@ -1,6 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/hcmiu-logo.png";
 import { routeMatcher } from "../utils/route-matcher";
+import { FaUserAlt } from "react-icons/fa";
 
 export const Nav = ({ onSignOut }) => {
   const navigate = useNavigate();
@@ -22,11 +23,14 @@ export const Nav = ({ onSignOut }) => {
         <NavItem title="Processors" path="processors" />
         <NavItem title="Problems" path="problems" />
       </div>
+      <div>Admin</div>
       <div
-        className="bg-background-25 rounded-full w-14 h-14 truncate cursor-pointer hover:bg-background-600"
+        className="bg-background-25 rounded-full w-14 h-14 truncate cursor-pointer hover:bg-background-600 flex items-center justify-center"
         title="Sign Out"
         onClick={handleSignOut}
-      ></div>
+      >
+        <FaUserAlt />
+      </div>
     </div>
   );
 };

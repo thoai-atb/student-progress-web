@@ -10,12 +10,12 @@ export const ProgressesNav = () => {
     selectedProgressCategory,
     setSelectedProgressCategory,
     featuredProgresses,
-    studentsData,
+    studentDistributions,
   } = useDashboardContext();
 
   const displayProgressList = useDisplayStudentsData(
     featuredProgresses,
-    studentsData
+    studentDistributions
   );
 
   function handleClick(category) {
@@ -31,7 +31,7 @@ export const ProgressesNav = () => {
     >
       <FeaturedHeader />
       <div className="relative flex-1">
-        <div className="absolute inset-0 max-h-full w-full overflow-auto scrollbar-styled">
+        <div className="absolute inset-0 max-h-full w-full overflow-auto scrollbar-hover">
           {displayProgressList.map((displayData) => {
             const { category } = displayData;
             return (

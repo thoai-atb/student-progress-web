@@ -18,13 +18,13 @@ export const DashboardFeaturedProgresses = () => {
     progressCategories,
     featuredProgresses,
     setFeaturedProgressIds,
-    studentsData,
+    studentDistributions,
   } = useDashboardContext();
   const [newFeaturedProgresses, setNewFeaturedProgresses] = useState([]);
 
   const displayStudentsData = useDisplayStudentsData(
     progressCategories,
-    studentsData
+    studentDistributions
   );
 
   function handleCancel() {
@@ -176,7 +176,7 @@ const CircleButton = ({
 }) => {
   return (
     <div
-      className={`px-2 text-background-600 ${hoverTextClass} cursor-pointer`}
+      className={`px-2 text-background-200 ${hoverTextClass} cursor-pointer`}
       {...props}
     >
       {children}
@@ -188,7 +188,7 @@ const SelectProgressRow = ({ name, selected, onSelect, dataColor }) => {
   return (
     <div
       className={
-        "flex w-full items-center px-4 p-2  rounded my-1 shadow-sm cursor-pointer border border-transparent hover:bg-primary-100" +
+        "flex w-full items-center px-4 p-2  rounded my-1 shadow-sm cursor-pointer border border-transparent hover:bg-primary-50" +
         (selected
           ? " bg-primary-50 text-primary-500"
           : " bg-white text-background-900")

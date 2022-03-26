@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { MediatorManagerAPI } from "../api/mediator-manager-api";
 
-export const useStudentsData = (studentYear) => {
-  const [studentsData, setStudentsData] = useState([]);
+export const useStudentDistributions = (studentYear) => {
+  const [studentDistributions, setStudentDistributions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -11,8 +11,10 @@ export const useStudentsData = (studentYear) => {
     const getProgressCategories = async () => {
       setIsLoading(true);
       try {
-        const response = await MediatorManagerAPI.getStudentsData(studentYear);
-        setStudentsData(response.data);
+        const response = await MediatorManagerAPI.getStudentDistributions(
+          studentYear
+        );
+        setStudentDistributions(response.data);
       } catch (error) {
         setError(error);
       } finally {
@@ -22,5 +24,5 @@ export const useStudentsData = (studentYear) => {
     getProgressCategories();
   }, [studentYear]);
 
-  return { studentsData, isLoading, error };
+  return { studentDistributions, isLoading, error };
 };

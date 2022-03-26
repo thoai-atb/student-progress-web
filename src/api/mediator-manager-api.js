@@ -11,14 +11,17 @@ const axiosInstance = axios.create({
 });
 
 export const MediatorManagerAPI = {
+  login: (username, password) => {
+    return axiosInstance.post("/api/login", { username, password });
+  },
   getProgressCategories: () => {
     return axiosInstance.get("/api/progress-categories");
   },
   getStudentYears: () => {
     return axiosInstance.get("/api/student-years");
   },
-  getStudentsData: (studentYear) => {
-    return axiosInstance.get(`/api/students-data/${studentYear}`);
+  getStudentDistributions: (studentYear) => {
+    return axiosInstance.get(`/api/distributions/${studentYear}`);
   },
   getBrowseStudents: ({
     progressCategoryId,
@@ -30,23 +33,18 @@ export const MediatorManagerAPI = {
     size,
   }) => {
     const params = {};
-    if (progressCategoryId) params.progressCategoryId = progressCategoryId;
     if (studentYearId) params.studentYearId = studentYearId;
     if (statusId) params.statusId = statusId;
     if (studentId) params.studentId = studentId;
     if (studentName) params.studentName = studentName;
     if (page) params.page = page;
     if (size) params.size = size;
-    return axiosInstance.get(`/api/browse/${progressCategoryId}`, {
+    return axiosInstance.get(`/api/students/${progressCategoryId}`, {
       params,
     });
   },
   getStudentData: (studentId, progressCategoryId) => {
-    return axiosInstance.get(`/api/browse/student/${studentId}`, {
-      params: {
-        progressCategoryId,
-      },
-    });
+    return axiosInstance.get(`/api/student/${studentId}/${progressCategoryId}`);
   },
   getProcessors: (progressCategoryId) => {
     return axiosInstance.get(`/api/processors/${progressCategoryId}`);

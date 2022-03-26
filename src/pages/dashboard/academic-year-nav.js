@@ -28,7 +28,7 @@ const YearButton = ({ year }) => {
   return (
     <div
       className={
-        "relative flex items-center justify-center text-lg h-16 w-16 cursor-pointer hover:text-primary-500" +
+        "relative flex items-center justify-center text-lg h-14 w-16 cursor-pointer hover:text-primary-500" +
         (active ? " bg-white text-primary-500" : " text-background-600")
       }
       onClick={() => setSelectedYear(year)}

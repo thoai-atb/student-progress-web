@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import { useAppContext } from "../../app.context";
 import { useProgressCategories } from "../../hooks/use-progress-categories";
 import { useStudentYears } from "../../hooks/use-student-years";
-import { useStudentsData } from "../../hooks/use-students-data";
+import { useStudentDistributions } from "../../hooks/use-student-distributions";
 import { AcademicYearNav } from "./academic-year-nav";
 import { DashboardContext } from "./dashboard.context";
 import { ProgressesNav } from "./progress-nav";
@@ -11,13 +11,13 @@ import { ProgressesNav } from "./progress-nav";
 export const DashboardPage = () => {
   const [selectedProgressCategory, setSelectedProgressCategory] = useState();
   const [selectedYear, setSelectedYear] = useState("22");
-  const {featuredProgressIds, setFeaturedProgressIds} = useAppContext();
+  const { featuredProgressIds, setFeaturedProgressIds } = useAppContext();
   const [featuredProgresses, setFeaturedProgresses] = useState([]);
 
   const { progressCategories } = useProgressCategories();
   const { studentYears } = useStudentYears();
-  const { studentsData, isLoading: studentsDataLoading } =
-    useStudentsData(selectedYear);
+  const { studentDistributions, isLoading: studentDistributionsLoading } =
+    useStudentDistributions(selectedYear);
 
   useEffect(() => {
     if (featuredProgresses && featuredProgresses.length > 0) {
@@ -41,8 +41,8 @@ export const DashboardPage = () => {
       value={{
         progressCategories,
         studentYears,
-        studentsData,
-        studentsDataLoading,
+        studentDistributions,
+        studentDistributionsLoading,
         selectedProgressCategory,
         setSelectedProgressCategory,
         selectedYear,

@@ -8,14 +8,14 @@ import { useMemo } from "react";
 
 export const DashboardContent = () => {
   const navigate = useNavigate();
-  const { selectedProgressCategory, selectedYear, studentsData } =
+  const { selectedProgressCategory, selectedYear, studentDistributions } =
     useDashboardContext();
   const currentProgressStudentsData = useMemo(() => {
     if (!selectedProgressCategory) return null;
-    return studentsData.find(
+    return studentDistributions.find(
       (data) => data.progressCategoryId === selectedProgressCategory.id
     );
-  }, [selectedProgressCategory, studentsData]);
+  }, [selectedProgressCategory, studentDistributions]);
 
   function handleBrowseClick() {
     navigate({

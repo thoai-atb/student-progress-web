@@ -18,6 +18,8 @@ code {
     monospace;
 }
 
+/* =============================================== STYLED SCROLLBAR */
+
 .scrollbar-styled {
   scrollbar-color: #f5f5f5;
   scrollbar-width: thin;
@@ -45,6 +47,8 @@ code {
   border-radius: 10px;
 }
 
+/* ============================================== HIDE SCROLLBAR */
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
@@ -54,6 +58,28 @@ code {
 .hide-scrollbar {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+/* ============================================== HOVER SCROLLBAR */
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scrollbar-hover::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.scrollbar-hover {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-hover:hover::-webkit-scrollbar {
+  display: block;
+}
+
+.scrollbar-hover:hover {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: thin; /* Firefox */
 }
 
 .table-styled {
