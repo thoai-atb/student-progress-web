@@ -95,7 +95,7 @@ export const DashboardFeaturedProgresses = () => {
                   key={category.id}
                   className="flex w-full items-center bg-white p-2 rounded my-1 shadow-sm px-4 trasition-all duration-100 hover:bg-primary-50"
                 >
-                  <div className="">{category.name}</div>
+                  <div className="">{category.name} progress</div>
                   <div className="flex-1" />
                   <DataColor
                     data={displayStudentsData.find(
@@ -188,14 +188,14 @@ const SelectProgressRow = ({ name, selected, onSelect, dataColor }) => {
   return (
     <div
       className={
-        "flex w-full items-center px-4 p-2  rounded my-1 shadow-sm cursor-pointer border border-transparent hover:bg-primary-50" +
+        "flex w-full items-center px-4 p-2  rounded my-1 shadow-sm cursor-pointer border border-transparent hover:bg-primary-100" +
         (selected
-          ? " bg-primary-50 text-primary-500"
+          ? " bg-primary-100 text-primary-500"
           : " bg-white text-background-900")
       }
       onClick={onSelect}
     >
-      <div className="flex-1 text-background-900">{name}</div>
+      <div className="flex-1 text-background-900">{name} progress</div>
       <div className="flex-1" />
       {dataColor}
       <div className="px-2">

@@ -31,7 +31,7 @@ export const ProgressesNav = () => {
     >
       <FeaturedHeader />
       <div className="relative flex-1">
-        <div className="absolute inset-0 max-h-full w-full overflow-auto scrollbar-hover">
+        <div className="absolute inset-0 max-h-full w-full overflow-auto scrollbar-styled">
           {displayProgressList.map((displayData) => {
             const { category } = displayData;
             return (

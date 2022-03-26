@@ -7,17 +7,15 @@ export const useDisplayStudentsData = (progresses, studentsData) => {
         const metadata = studentsData.find(
           (data) => data.progressCategoryId === category.id
         );
-        if (!metadata) return null;
+        if (!metadata?.data) return null;
         const total = metadata.data.reduce(
           (acc, curr) => acc + curr.students,
           0
         );
-        const finishedCount = metadata.data.find(
-          (step) => step.id === "finished"
-        ).students;
-        const droppedCount = metadata.data.find(
-          (step) => step.id === "dropped"
-        ).students;
+        const finishedCount =
+          metadata.data.find((step) => step.id === "finished")?.students || 0;
+        const droppedCount =
+          metadata.data.find((step) => step.id === "dropped")?.students || 0;
         const displayData = {
           category,
           total,

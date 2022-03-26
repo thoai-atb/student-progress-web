@@ -37,10 +37,10 @@ export const BarChartCustom = ({ data }) => {
         height={300}
         data={displayData}
         margin={{
-          top: 5,
+          top: 15,
           right: 30,
           left: 20,
-          bottom: 5,
+          bottom: 0,
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
