@@ -188,9 +188,9 @@ const SelectProgressRow = ({ name, selected, onSelect, dataColor }) => {
   return (
     <div
       className={
-        "flex w-full items-center px-4 p-2  rounded my-1 shadow-sm cursor-pointer border border-transparent hover:bg-primary-100" +
+        "flex w-full items-center px-4 p-2  rounded my-1 shadow-sm cursor-pointer border border-transparent hover:bg-primary-50" +
         (selected
-          ? " bg-primary-100 text-primary-500"
+          ? " bg-primary-50 text-primary-500"
           : " bg-white text-background-900")
       }
       onClick={onSelect}

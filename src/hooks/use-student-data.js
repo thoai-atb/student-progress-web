@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { MediatorManagerAPI } from "../api/mediator-manager-api";
 
-export const useStudentData = (studentId, progressCategoryId) => {
-  const [studentData, setStudentData] = useState({});
+export const useStudentData = (studentId, progressCategoryId, reload, setReload) => {
+  const [studentData, setStudentData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -20,8 +20,15 @@ export const useStudentData = (studentId, progressCategoryId) => {
         setError(error);
       }
     };
-    getStudentData();
-  }, [studentId, progressCategoryId]);
+    if(reload || !studentData) {
+      getStudentData();
+      setReload(false);
+    }
+  }, [studentId, progressCategoryId, reload, setReload, studentData]);
+
+  useEffect(() => {
+    setReload(true);
+  }, [studentId, progressCategoryId, setReload]);
 
   return { studentData, isLoading, error };
 };

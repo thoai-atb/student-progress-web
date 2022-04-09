@@ -15,6 +15,8 @@ export const ProgressCategorySelect = ({ label = "Progress Category" }) => {
 
   function handleProgressCategoryChange({ value }) {
     searchParams.set("progressCategory", value);
+    const status = searchParams.get("status");
+    if (status && status !== "all") searchParams.set("status", "all");
     setSearchParams(searchParams);
   }
 

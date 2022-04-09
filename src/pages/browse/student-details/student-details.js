@@ -1,4 +1,5 @@
-import { FaArrowLeft } from "react-icons/fa";
+import { useState } from "react";
+import { FaArrowLeft, FaSyncAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { ButtonTransparent } from "../../../components/button-transparent";
 import { ProgressCategorySelect } from "../input-components/progress-category-select";
@@ -9,21 +10,33 @@ import { StudentInfo } from "./student-info";
 
 export const StudentDetails = () => {
   const navigate = useNavigate();
+  const [reload, setReload] = useState(true);
 
   function handleMyBack() {
     navigate(-1);
   }
 
+  function handleRefresh() {
+    setReload(true);
+  }
+
   return (
-    <StudentDetailsProvider>
+    <StudentDetailsProvider reload={reload} setReload={setReload}>
       <div className="relative w-full h-full">
-        <div className="flex items-center justify-between my-4">
+        <div className="flex items-center justify-between my-4 gap-4">
           <ButtonTransparent
             text="Back"
             className="w-15 my-4"
             onClick={handleMyBack}
             icon={<FaArrowLeft />}
           />
+          <ButtonTransparent
+            text="Refresh"
+            className="w-15 my-4"
+            onClick={handleRefresh}
+            icon={<FaSyncAlt />}
+          />
+          <div className="flex-1" />
           <div className="flex items-center gap-4">
             <div className="text-background-800">Progress Category</div>
             <ProgressCategorySelect label={""} />

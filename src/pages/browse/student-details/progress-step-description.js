@@ -3,6 +3,7 @@ import { WhiteTriangleUp } from "../../../components/white-triangle-up";
 import { DataTable } from "./data-table";
 import { PercentBar } from "./percent-bar";
 import { useStudentDetailsContext } from "./student-details.context";
+import { FaCheck } from "react-icons/fa";
 
 export const ProgressStepDescription = () => {
   const { selectedStep } = useStudentDetailsContext();
@@ -40,6 +41,18 @@ export const ProgressStepDescription = () => {
           ))}
         </div>
       )}
+      {selectedStep.items?.length > 0 && (
+        <div className="p-4 text-background-900 flex flex-col w-full gap-4">
+          {selectedStep.items.map((item) => (
+            <StepItem
+              key={item.label}
+              label={item.label}
+              description={item.description}
+              status={item.status}
+            />
+          ))}
+        </div>
+      )}
     </WhiteCard>
   );
 };
@@ -59,6 +72,22 @@ const TriangleIndicator = ({ selectedStep }) => {
           />
         );
       })}
+    </div>
+  );
+};
+
+const StepItem = ({ label, description, status }) => {
+  const checked = status === "done";
+  const bgClass = checked ? "bg-success-500" : "bg-background-100";
+  return (
+    <div className="flex flex-row gap-8 w-full items-center">
+      <div className="flex flex-col gap-4">
+        <div className={`rounded-full ${bgClass} text-white p-2 text-sm`}>
+          <FaCheck />
+        </div>
+      </div>
+      <div className="text-background-900 font-bold">{label}</div>
+      <div className="text-background-900">{description}</div>
     </div>
   );
 };

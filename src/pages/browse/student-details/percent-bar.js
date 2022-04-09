@@ -8,6 +8,7 @@ export const PercentBar = ({ percent = 50 }) => {
           }
           style={{
             width: `${percent}%`,
+            transition: "width 0.2s ease-in-out",
           }}
         />
       </div>

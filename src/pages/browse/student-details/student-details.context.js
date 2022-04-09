@@ -14,12 +14,12 @@ export const useStudentDetailsContext = () => {
   return context;
 };
 
-export const StudentDetailsProvider = ({ children }) => {
+export const StudentDetailsProvider = ({ children, reload, setReload }) => {
   const params = useParams();
   const [searchParams] = useSearchParams();
   const studentId = params.studentId;
   const progressCategoryId = searchParams.get("progressCategory") || "general";
-  const { studentData } = useStudentData(studentId, progressCategoryId);
+  const { studentData } = useStudentData(studentId, progressCategoryId, reload, setReload);
   const currentSteps = useMemo(
     () => studentData?.progressStatus?.progressData || [],
     [studentData]

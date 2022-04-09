@@ -3,6 +3,7 @@ import { useStudentDetailsContext } from "./student-details.context";
 
 export const StudentInfo = () => {
   const { studentData } = useStudentDetailsContext();
+  if (!studentData) return null;
   return (
     <WhiteCard className="mb-8">
       <div className="text-background-700 font-bold mb-4">Student Info</div>

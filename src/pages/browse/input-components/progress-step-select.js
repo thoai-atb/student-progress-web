@@ -37,19 +37,24 @@ export const ProgressStepSelect = () => {
   }, [progressCategories, progressCategoryId]);
 
   function handleChange(option) {
-    setSelectedOption(option);
+    searchParams.set("status", option.value);
+    setSearchParams(searchParams);
   }
 
   useEffect(() => {
-    if (selectedOption) {
-      searchParams.set("status", selectedOption.value);
+    const value = searchParams.get("status");
+    if (value) {
+      const option = stepOptions.find((o) => o.value === value);
+      if (option) setSelectedOption(option);
+      else {
+        searchParams.set("status", stepOptions[0].value);
+        setSearchParams(searchParams);
+      }
+    } else {
+      searchParams.set("status", stepOptions[0].value);
       setSearchParams(searchParams);
     }
-  }, [selectedOption, searchParams, setSearchParams]);
-
-  useEffect(() => {
-    if (stepOptions) setSelectedOption(stepOptions[0]);
-  }, [stepOptions]);
+  }, [searchParams, stepOptions, setSearchParams]);
 
   return (
     <SelectCustom
