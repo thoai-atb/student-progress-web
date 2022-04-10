@@ -14,7 +14,7 @@ export const ProgressStepDescription = () => {
       </WhiteCard>
     );
   return (
-    <WhiteCard className="relative">
+    <WhiteCard className="relative" style={{ minHeight: 600 }}>
       <TriangleIndicator selectedStep={selectedStep} />
       <div className="text-background-700 font-bold mb-4">
         {selectedStep.name}

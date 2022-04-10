@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useLayoutEffect,
+  useMemo,
+  useState,
+} from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { useStudentData } from "../../../hooks/use-student-data";
 
@@ -16,26 +22,63 @@ export const useStudentDetailsContext = () => {
 
 export const StudentDetailsProvider = ({ children, reload, setReload }) => {
   const params = useParams();
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const studentId = params.studentId;
   const progressCategoryId = searchParams.get("progressCategory") || "general";
-  const { studentData } = useStudentData(studentId, progressCategoryId, reload, setReload);
+  const { studentData } = useStudentData(
+    studentId,
+    progressCategoryId,
+    reload,
+    setReload
+  );
   const currentSteps = useMemo(
     () => studentData?.progressStatus?.progressData || [],
     [studentData]
   );
   const [selectedStep, setSelectedStep] = useState(null);
+  const [resetCurrentStep, setResetCurrentStep] = useState(false);
 
-  useEffect(() => {
-    if (currentSteps)
-      setSelectedStep(currentSteps.find((step) => step.status === "current"));
-  }, [currentSteps]);
+  useLayoutEffect(() => {
+    if (!studentData?.progressStatus?.step) return;
+    const selectedStepId = searchParams.get("step");
+    var useDefault = true;
+    if (selectedStepId) {
+      const selectedStep = currentSteps.find(
+        (step) => step.id === selectedStepId
+      );
+      if (selectedStep) {
+        setSelectedStep(selectedStep);
+        useDefault = false;
+      }
+    }
+    if (useDefault) {
+      searchParams.set("step", studentData?.progressStatus?.step?.id);
+      setSearchParams(searchParams);
+    }
+  }, [
+    currentSteps,
+    searchParams,
+    studentData,
+    resetCurrentStep,
+    setSearchParams,
+  ]);
+
+  useLayoutEffect(() => {
+    if (resetCurrentStep) {
+      searchParams.delete("step");
+      setSearchParams(searchParams);
+      setResetCurrentStep(false);
+    }
+  }, [resetCurrentStep, searchParams, setSearchParams]);
+
+  useLayoutEffect(() => {
+    setResetCurrentStep(true);
+  }, [progressCategoryId]);
 
   const value = {
     studentData,
     currentSteps,
     selectedStep,
-    setSelectedStep,
   };
   return (
     <StudentDetailsContext.Provider value={value}>

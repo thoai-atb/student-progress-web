@@ -1,11 +1,17 @@
 import { useMemo } from "react";
 import { FaCheck, FaTimes, FaDotCircle } from "react-icons/fa";
+import { useSearchParams } from "react-router-dom";
 import { WhiteCard } from "../../../components/white-card";
 import { useStudentDetailsContext } from "./student-details.context";
 
 export const ProgressIndicator = () => {
-  const { selectedStep, setSelectedStep, currentSteps } =
-    useStudentDetailsContext();
+  const { selectedStep, currentSteps } = useStudentDetailsContext();
+  const [searchParams, setSearchParams] = useSearchParams();
+  function setSelectedStep(step) {
+    if (step === selectedStep) return;
+    searchParams.set("step", step.id);
+    setSearchParams(searchParams);
+  }
   return (
     <WhiteCard className="mb-8">
       <div className="flex flex-row justify-around items-center">
@@ -40,10 +46,10 @@ const LightIndicator = ({
   const doneOrCurrent = done || isCurrentStep;
   const backgroundClassname = useMemo(() => {
     if (error && doneOrCurrent) return "bg-error-500";
-    if (done) return "bg-success-500";
+    if (done || (isCurrentStep && isFinish)) return "bg-success-500";
     if (isCurrentStep) return "bg-primary-500";
     return "bg-background-100";
-  }, [done, error, isCurrentStep, doneOrCurrent]);
+  }, [done, error, isCurrentStep, doneOrCurrent, isFinish]);
   const icon = useMemo(() => {
     if (error) return <FaTimes />;
     if (isFinish) return <FaCheck />;

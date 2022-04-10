@@ -11,6 +11,7 @@ export const ProgressStepSelect = () => {
   } = useBrowseContext();
 
   const [selectedOption, setSelectedOption] = useState(null);
+  const [refreshStatus, setRefreshStatus] = useState(false);
 
   const stepOptions = useMemo(() => {
     var steps = [];
@@ -42,6 +43,7 @@ export const ProgressStepSelect = () => {
   }
 
   useEffect(() => {
+    if(!refreshStatus) return;
     const value = searchParams.get("status");
     if (value) {
       const option = stepOptions.find((o) => o.value === value);
@@ -49,12 +51,18 @@ export const ProgressStepSelect = () => {
       else {
         searchParams.set("status", stepOptions[0].value);
         setSearchParams(searchParams);
+        setRefreshStatus(false);
       }
     } else {
       searchParams.set("status", stepOptions[0].value);
       setSearchParams(searchParams);
+      setRefreshStatus(false);
     }
-  }, [searchParams, stepOptions, setSearchParams]);
+  }, [searchParams, stepOptions, setSearchParams, refreshStatus]);
+
+  useEffect(() => {
+    setRefreshStatus(true);
+  }, [stepOptions])
 
   return (
     <SelectCustom

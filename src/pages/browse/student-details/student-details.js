@@ -13,7 +13,7 @@ export const StudentDetails = () => {
   const [reload, setReload] = useState(true);
 
   function handleMyBack() {
-    navigate(-1);
+    navigate("/browse");
   }
 
   function handleRefresh() {

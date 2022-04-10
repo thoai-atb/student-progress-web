@@ -9,6 +9,7 @@ export const useStudentData = (studentId, progressCategoryId, reload, setReload)
   useEffect(() => {
     const getStudentData = async () => {
       setIsLoading(true);
+      setStudentData(null);
       try {
         const response = await MediatorManagerAPI.getStudentData(
           studentId,
