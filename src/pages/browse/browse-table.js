@@ -15,7 +15,7 @@ export const BrowseTable = () => {
     });
   }
   return (
-    <div className="bg-white shadow-xl m-4 w-full rounded">
+    <div className="bg-white shadow-xl m-4 w-full">
       <table className="w-full table-styled">
         <thead>
           <tr>

@@ -8,21 +8,30 @@ import { TextInput } from "../components/text-input";
 export const LoginPage = ({ onAuthentication }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  
+
   function handleSignIn() {
     const loginAsync = async () => {
+      if (loading) return;
       if (!username || !password) {
         alert("Please enter username and password");
         return;
       }
-      const res = await MediatorManagerAPI.login(username, password);
-      if (!res.data.success) {
-        alert("Invalid username or password");
-        return;
+      try {
+        setLoading(true);
+        const res = await MediatorManagerAPI.login(username, password);
+        if (!res.data.success) {
+          alert("Invalid username or password");
+          return;
+        }
+        onAuthentication();
+        navigate("/");
+      } catch (err) {
+        alert("Can't connect to server");
+      } finally {
+        setLoading(false);
       }
-      onAuthentication();
-      navigate("/");
     };
     loginAsync();
   }
@@ -59,7 +68,8 @@ export const LoginPage = ({ onAuthentication }) => {
           />
           <Button
             text="Sign In"
-            className="my-4 w-full text-sm"
+            className={"my-4 w-full text-sm" + (loading ? " opacity-50" : "")}
+            disabled={loading}
             fontSize="text-xl"
             onClick={handleSignIn}
           />

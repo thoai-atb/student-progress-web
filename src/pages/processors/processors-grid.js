@@ -1,4 +1,5 @@
 import { useProcessorsContext } from "./processors.context";
+import { FaExclamationTriangle } from "react-icons/fa";
 
 export const ProcessorsGrid = () => {
   const { processors, setSelectedProcessor, selectedProcessor } =
@@ -29,7 +30,7 @@ export const ProcessorsGrid = () => {
             />
           ))}
         </div>
-        <div className="my-4 text-lg">Event Processors</div>
+        <div className="mb-4 mt-8 text-lg">Event Processors</div>
         <div className="grid grid-cols-3 gap-4" style={{ maxHeight: "40rem" }}>
           {nonMediatorProcessors?.map((processorData) => (
             <ProcessorItem
@@ -48,16 +49,25 @@ export const ProcessorsGrid = () => {
 };
 
 const ProcessorItem = ({ processorData, onSelect, active }) => {
+  const { name, processors, problems } = processorData;
+  const bgClass = processors > 0 ? "bg-white" : "opacity-50";
+  const borderClass = active
+    ? "border-2 border-primary-500"
+    : "border-2 border-opacity-0";
+  const problemClass = problems > 0 ? "text-error-500" : "";
   return (
     <div
-      className={`${
-        active ? "border-2 border-primary-500" : " border-2 border-opacity-0"
-      } bg-white shadow-sm text-background-800 rounded-lg p-4 cursor-pointer box-border h-36`}
+      className={`${borderClass} ${bgClass} relative shadow-sm text-background-800 p-4 cursor-pointer box-border h-36`}
       onClick={onSelect}
     >
-      <div className="mb-4 truncate">{processorData.name}</div>
-      <div className="text-lg">Processors: {processorData.processors}</div>
-      <div className="text-lg">Problems: {processorData.problems}</div>
+      <div className="mb-4 truncate">{name}</div>
+      <div className="text-lg">Processors: {processors}</div>
+      <div className={`text-lg ${problemClass}`}>Problems: {problems}</div>
+      {problems > 0 && (
+        <div className="absolute bottom-0 right-0 p-4 text-error-500">
+          <FaExclamationTriangle />
+        </div>
+      )}
     </div>
   );
 };

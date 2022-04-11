@@ -42,7 +42,7 @@ export const ProgressStepDescription = () => {
         </div>
       )}
       {selectedStep.items?.length > 0 && (
-        <div className="p-4 text-background-900 flex flex-col w-full gap-4">
+        <div className="p-4 text-background-900 flex flex-col w-full gap-6">
           {selectedStep.items.map((item) => (
             <StepItem
               key={item.label}
@@ -86,7 +86,7 @@ const StepItem = ({ label, description, status }) => {
           <FaCheck />
         </div>
       </div>
-      <div className="text-background-900 font-bold">{label}</div>
+      <div className="text-background-900 font-semibold">{label}</div>
       <div className="text-background-900">{description}</div>
     </div>
   );

@@ -1,28 +1,33 @@
 import { useEffect, useState } from "react";
 import { MediatorManagerAPI } from "../api/mediator-manager-api";
 
-export const useProcessors = (progressCategoryId) => {
-  const [processors, setProcessors] = useState([]);
+export const useProcessors = (progressCategoryId, reload, setReload) => {
+  const [processors, setProcessors] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const getProcessors = async (progressCategoryId) => {
-    setIsLoading(true);
-    try {
-      const response = await MediatorManagerAPI.getProcessors(
-        progressCategoryId
-      );
-      setProcessors(response.data);
-    } catch (error) {
-      setError(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  useEffect(() => {
+    const getProcessors = async (progressCategoryId) => {
+      if (!reload && processors) return;
+      setIsLoading(true);
+      try {
+        const response = await MediatorManagerAPI.getProcessors(
+          progressCategoryId
+        );
+        setProcessors(response.data);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setIsLoading(false);
+        setReload(false);
+      }
+    };
+    getProcessors(progressCategoryId);
+  }, [progressCategoryId, reload, setReload, processors]);
 
   useEffect(() => {
-    getProcessors(progressCategoryId);
-  }, [progressCategoryId]);
+    setReload(true);
+  }, [progressCategoryId, setReload]);
 
   return { processors, isLoading, error };
 };

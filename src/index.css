@@ -83,7 +83,7 @@ code {
 }
 
 .table-styled {
-  @apply rounded overflow-hidden text-background-900;
+  @apply overflow-hidden text-background-900;
 }
 
 .table-styled tr {

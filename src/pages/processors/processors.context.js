@@ -16,8 +16,11 @@ export const useProcessorsContext = () => {
 
 export const ProcessorsProvider = ({ children }) => {
   const [searchParams] = useSearchParams();
+  const [reload, setReload] = useState(false);
   const { processors } = useProcessors(
-    searchParams.get("progressCategory") || "all"
+    searchParams.get("progressCategory") || "all",
+    reload,
+    setReload
   );
   const [selectedProcessor, setSelectedProcessor] = useState(null);
 
@@ -27,6 +30,8 @@ export const ProcessorsProvider = ({ children }) => {
 
   const value = {
     processors,
+    reload,
+    setReload,
     selectedProcessor,
     setSelectedProcessor,
   };
