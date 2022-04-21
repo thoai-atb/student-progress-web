@@ -15,10 +15,10 @@ export const ProcessorsGrid = () => {
     <div className="flex-1 h-full">
       <div
         className="scrollbar-styled overflow-auto pr-4"
-        style={{ maxHeight: "40rem" }}
+        style={{ maxHeight: "60rem" }}
       >
         <div className="mb-4 text-lg">Mediators</div>
-        <div className="grid grid-cols-3 gap-4" style={{ maxHeight: "40rem" }}>
+        <div className="grid grid-cols-3 gap-4" style={{ maxHeight: "60rem" }}>
           {mediatorProcessors?.map((processorData) => (
             <ProcessorItem
               key={processorData.id}
@@ -49,21 +49,35 @@ export const ProcessorsGrid = () => {
 };
 
 const ProcessorItem = ({ processorData, onSelect, active }) => {
-  const { name, processors, problems } = processorData;
-  const bgClass = processors > 0 ? "bg-white" : "opacity-50";
-  const borderClass = active
-    ? "border-2 border-primary-500"
-    : "border-2 border-opacity-0";
-  const problemClass = problems > 0 ? "text-error-500" : "";
+  const { name, processors, problems, resolvedProblems } = processorData;
+  const unresolvedProblems = problems - resolvedProblems;
+  const bgClass = processors > 0 ? "bg-primary-50" : "opacity-50";
+  const borderClass = (() => {
+    if (active) {
+      return "border-2 border-primary-500";
+    }
+    if (processors > 0) {
+      return "border border-primary-500";
+    }
+    return "border border-background-300";
+  })();
+  const textClass = processors > 0 ? "text-black" : "text-background-800";
+  const problemClass = unresolvedProblems > 0 ? "text-error-500" : "";
   return (
     <div
-      className={`${borderClass} ${bgClass} relative shadow-sm text-background-800 p-4 cursor-pointer box-border h-36`}
+      className={`${borderClass} ${bgClass} relative shadow-sm ${textClass} p-4 cursor-pointer box-border h-36`}
       onClick={onSelect}
     >
       <div className="mb-4 truncate">{name}</div>
       <div className="text-lg">Processors: {processors}</div>
-      <div className={`text-lg ${problemClass}`}>Problems: {problems}</div>
-      {problems > 0 && (
+      <div className={`text-lg ${problemClass}`}>
+        Problems: {problems}{" "}
+        {problems > 0 && unresolvedProblems > 0 && (
+          <span>({unresolvedProblems} unresolved)</span>
+        )}
+        {problems > 0 && unresolvedProblems === 0 && <span>(resolved)</span>}
+      </div>
+      {unresolvedProblems.length > 0 && (
         <div className="absolute bottom-0 right-0 p-4 text-error-500">
           <FaExclamationTriangle />
         </div>

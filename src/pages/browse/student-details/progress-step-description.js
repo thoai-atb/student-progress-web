@@ -86,8 +86,8 @@ const StepItem = ({ label, description, status }) => {
           <FaCheck />
         </div>
       </div>
-      <div className="text-background-900 font-semibold">{label}</div>
-      <div className="text-background-900">{description}</div>
+      <div className="text-background-900">{label}</div>
+      <div className="text-background-500">{description}</div>
     </div>
   );
 };
