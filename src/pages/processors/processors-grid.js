@@ -68,12 +68,12 @@ const ProcessorItem = ({ processorData, onSelect, active }) => {
       className={`${borderClass} ${bgClass} relative shadow-sm ${textClass} p-4 cursor-pointer box-border h-36`}
       onClick={onSelect}
     >
-      <div className="mb-4 truncate">{name}</div>
-      <div className="text-lg">Processors: {processors}</div>
-      <div className={`text-lg ${problemClass}`}>
+      <div className="mb-6 truncate">{name}</div>
+      <div className="text-base">Processors: {processors}</div>
+      <div className={`text-base ${problemClass}`}>
         Problems: {problems}{" "}
         {problems > 0 && unresolvedProblems > 0 && (
-          <span>({unresolvedProblems} unresolved)</span>
+          <span>({unresolvedProblems} unfixed)</span>
         )}
         {problems > 0 && unresolvedProblems === 0 && <span>(resolved)</span>}
       </div>

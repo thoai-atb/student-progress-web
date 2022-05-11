@@ -27,7 +27,7 @@ export const ProcessorDetails = () => {
           >
             Problems: {problems}{" "}
             {problems > 0 && unresolvedProblems > 0 && (
-              <span>({unresolvedProblems} unresolved)</span>
+              <span>({unresolvedProblems} unfixed)</span>
             )}
             {problems > 0 && unresolvedProblems === 0 && (
               <span>(resolved)</span>
@@ -71,7 +71,7 @@ export const ProcessorDetails = () => {
                     </div>
                   </div>
                   {hasProblem && (
-                    <div className="flex w-full flex-col ml-4 my-4 bg-warning-50 text-base">
+                    <div className="flex w-full flex-col ml-4 my-4 bg-warning-50 max-h-96 overflow-scroll text-base">
                       {service.problems.map((problem) => {
                         const resolved = problem.resolved;
                         return (
