@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { MediatorManagerAPI } from "../api/mediator-manager-api";
+import { MediatorManagerAPI } from "../apis/mediator-manager-api";
 import mainLogo from "../assets/hcmiu-logo.png";
 import { Button } from "../components/button";
 import { TextInput } from "../components/text-input";

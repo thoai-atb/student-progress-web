@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { MediatorManagerAPI } from "../api/mediator-manager-api";
+import { MediatorManagerAPI } from "../apis/mediator-manager-api";
 
 export const useProgressCategories = () => {
   const [progressCategories, setProgressCategories] = useState([]);

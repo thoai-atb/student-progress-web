@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { MediatorManagerAPI } from "../api/mediator-manager-api";
+import { MediatorManagerAPI } from "../apis/mediator-manager-api";
 
 export const useStudentData = (studentId, progressCategoryId, reload, setReload) => {
   const [studentData, setStudentData] = useState();
